@@ -37,7 +37,9 @@ export const taskSlice = createSlice({
 
     // taskの編集
     editTask: (state, action) => {
+      console.log(taskSlice);
       const task = state.tasks.find((t) => t.id === action.payload.id);
+      console.log(state.tasks.find((t) => t.id === action.payload.id));
       if (task) {
         task.title = action.payload.title;
       }

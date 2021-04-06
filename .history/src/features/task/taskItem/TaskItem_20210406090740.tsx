@@ -1,12 +1,9 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import Checkbox from '@material-ui/core/Checkbox';
 import EventNoteIcon from '@material-ui/icons/EventNote';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Modal from '@material-ui/core/Modal';
-import { handleModalOpen, selectTask, selectIsModalOpen } from '../taskSlice';
-import TaskForm from '../taskForm/TaskForm';
 import styles from './TaskItem.module.scss';
 
 interface PropTypes {
@@ -14,15 +11,14 @@ interface PropTypes {
 }
 
 const TaskItem: React.FC<PropTypes> = ({ task }) => {
-  const isModalOpen = useSelector(selectIsModalOpen);
-  const dispatch = useDispatch();
+  const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
-    dispatch(selectTask(task));
-    dispatch(handleModalOpen(true));
+    setOpen(true);
   };
+
   const handleClose = () => {
-    dispatch(handleModalOpen(false));
+    setOpen(false);
   };
 
   return (
@@ -41,7 +37,7 @@ const TaskItem: React.FC<PropTypes> = ({ task }) => {
           onClick={() => console.log(`edit ${task.id}`)}
           className={styles.edit_button}
         >
-          <EditIcon className={styles.Icon} onClick={handleOpen} />
+          <EditIcon className={styles.Icon} />
         </button>
         <button
           onClick={() => console.log(`delete ${task.id}`)}
@@ -50,11 +46,13 @@ const TaskItem: React.FC<PropTypes> = ({ task }) => {
           <DeleteIcon className={styles.Icon} />
         </button>
       </div>
-      <Modal open={isModalOpen} onClose={handleClose} className={styles.modal}>
-        <div className={styles.modal_content}>
-          <div className={styles.modal_title}>Edit</div>
-          <TaskForm edit />
-        </div>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
+        <div>modal!!</div>
       </Modal>
     </div>
   );

@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { RootState } from '../../app/store';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { AppThunk, RootState } from '../../app/store';
 
 interface TaskState {
   idCount: number;
@@ -30,19 +30,6 @@ export const taskSlice = createSlice({
       state.tasks = [newTask, ...state.tasks];
     },
 
-    // どのタスクを選択しているかの管理
-    selectTask: (state, action) => {
-      state.selectedTask = action.payload;
-    },
-
-    // taskの編集
-    editTask: (state, action) => {
-      const task = state.tasks.find((t) => t.id === action.payload.id);
-      if (task) {
-        task.title = action.payload.title;
-      }
-    },
-
     // Modalを開くか閉じるかのフラグ管理
     handleModalOpen: (state, action) => {
       state.isModalOpen = action.payload;
@@ -50,19 +37,11 @@ export const taskSlice = createSlice({
   },
 });
 
-export const {
-  createTask,
-  selectTask,
-  editTask,
-  handleModalOpen,
-} = taskSlice.actions;
+export const { createTask, handleModalOpen } = taskSlice.actions;
 
-export const selectTasks = (state: RootState): TaskState['tasks'] =>
+export const selectTask = (state: RootState): TaskState['tasks'] =>
   state.task.tasks;
 export const selectIsModalOpen = (state: RootState): TaskState['isModalOpen'] =>
   state.task.isModalOpen;
-export const selectSelectedTask = (
-  state: RootState
-): TaskState['selectedTask'] => state.task.selectedTask;
 
 export default taskSlice.reducer;

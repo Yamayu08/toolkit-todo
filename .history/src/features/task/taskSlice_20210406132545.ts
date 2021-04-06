@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { RootState } from '../../app/store';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { AppThunk, RootState } from '../../app/store';
 
 interface TaskState {
   idCount: number;
@@ -50,12 +50,7 @@ export const taskSlice = createSlice({
   },
 });
 
-export const {
-  createTask,
-  selectTask,
-  editTask,
-  handleModalOpen,
-} = taskSlice.actions;
+export const { createTask, selectTask, handleModalOpen } = taskSlice.actions;
 
 export const selectTasks = (state: RootState): TaskState['tasks'] =>
   state.task.tasks;

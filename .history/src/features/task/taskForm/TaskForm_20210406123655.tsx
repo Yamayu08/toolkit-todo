@@ -1,13 +1,8 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useForm, Controller } from 'react-hook-form';
 import TextField from '@material-ui/core/TextField';
-import {
-  createTask,
-  editTask,
-  handleModalOpen,
-  selectSelectedTask,
-} from '../taskSlice';
+import { createTask, handleModalOpen } from '../taskSlice';
 import styles from './TaskForm.module.scss';
 import { register } from '../../../serviceWorker';
 
@@ -21,16 +16,13 @@ type PropsType = {
 
 const TaskForm: React.FC<PropsType> = ({ edit }) => {
   const dispatch = useDispatch();
-  const selectedTask = useSelector(selectSelectedTask);
   const { control, handleSubmit, setValue } = useForm();
   const handleCreate = (data: Inputs) => {
     dispatch(createTask(data.taskTitle));
     setValue('taskTitle', '');
   };
   const handleEdit = (data: Inputs) => {
-    const sendData = { ...selectedTask, title: data.taskTitle };
-    dispatch(editTask(sendData));
-    dispatch(handleModalOpen(false));
+    console.log(data);
   };
   return (
     <div className={styles.wrapper}>
@@ -40,7 +32,7 @@ const TaskForm: React.FC<PropsType> = ({ edit }) => {
       >
         <Controller
           control={control}
-          defaultValue={edit ? selectedTask.title : ''}
+          defaultValue={edit ? 'defaultValue' : ''}
           name="taskTitle"
           render={({ field }) => (
             <TextField
