@@ -1,0 +1,19 @@
+.root {
+  background-color: #ffd5c9;
+  height: 100vh;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 40px;
+
+  .wrapper {
+    height: 70vh;
+    width: 70vw;
+    border-radius: 10px;
+    background-color: #f1f2f7;
+    padding: 10px 40px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 8fr;
+  }
+}
