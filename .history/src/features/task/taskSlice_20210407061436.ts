@@ -55,11 +55,6 @@ export const taskSlice = createSlice({
         task.completed = !task.completed;
       }
     },
-
-    // タスクの削除
-    deleteTask: (state, action) => {
-      state.tasks = state.tasks.filter((t) => t.id !== action.payload.id);
-    },
   },
 });
 
@@ -68,8 +63,6 @@ export const {
   selectTask,
   editTask,
   handleModalOpen,
-  completeTask,
-  deleteTask,
 } = taskSlice.actions;
 
 export const selectTasks = (state: RootState): TaskState['tasks'] =>

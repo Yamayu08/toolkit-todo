@@ -10,7 +10,6 @@ import {
   selectTask,
   selectIsModalOpen,
   completeTask,
-  deleteTask,
 } from '../taskSlice';
 import TaskForm from '../taskForm/TaskForm';
 import styles from './TaskItem.module.scss';
@@ -40,7 +39,8 @@ const TaskItem: React.FC<PropTypes> = ({ task }) => {
       <div className={styles.right_item}>
         <Checkbox
           checked={task.completed}
-          onClick={() => dispatch(completeTask(task))}
+          onChange={() => console.log(`check ${task.id}`)}
+          onclick={() => dispatch(completeTask(task))}
           className={styles.checkbox}
         />
         <button
@@ -50,7 +50,7 @@ const TaskItem: React.FC<PropTypes> = ({ task }) => {
           <EditIcon className={styles.Icon} onClick={handleOpen} />
         </button>
         <button
-          onClick={() => dispatch(deleteTask(task))}
+          onClick={() => console.log(`delete ${task.id}`)}
           className={styles.delete_button}
         >
           <DeleteIcon className={styles.Icon} />

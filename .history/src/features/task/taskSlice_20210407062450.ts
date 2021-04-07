@@ -69,7 +69,6 @@ export const {
   editTask,
   handleModalOpen,
   completeTask,
-  deleteTask,
 } = taskSlice.actions;
 
 export const selectTasks = (state: RootState): TaskState['tasks'] =>
